@@ -4,7 +4,7 @@ const tamx = tela.clientHeight;
 const tamy = tela.clientWidth;
 var dirx = 1;
 var diry = 0;
-var bolinha = [];
+var bolinhas = [];
 
 class Bolinha {
   constructor() {
@@ -12,24 +12,26 @@ class Bolinha {
     this.g = Math.floor(Math.random() * 255);
     this.b = Math.floor(Math.random() * 255);
     this.tamanho = 20;
-    this.posx = this.offsetLeft - 20;
-    this.posy = this.offsetTop - 20;
     this.movx = 100;
     this.movy = 100;
-    this.mov = setInterval(this.movimento(), 500);
     this.creat();
+    this.mover();
+  }
+  
+  mover=()=>{
+    setInterval(this.movimento,500)
   }
 
   movimento = () => {
-    if (this.movx < (tamx-this.tamanho) && this.movx > 0) {
+    console.log(this.movx)
+    if (this.posx < (tamx-this.tamanho) && this.posx > 0) {
       this.movx += this.posx + (tamx*0.05) * dirx;
     }
-
-    if (this.movy < (tamy-this.tamanho) && this.movy > 0) {
-        this.movy += this.posy + (tamx*0.05) * diry;
-      }
+    if (this.posy < (tamy-this.tamanho) && this.posy > 0) {
+      this.movy += this.posy + (tamx*0.05) * diry;
+    }
   }
-
+  
   creat=()=>{
     const bolinha = document.createElement('div')
     tela.append(bolinha);
@@ -41,7 +43,9 @@ class Bolinha {
     margin-left: ${this.movx}px;
     margin-top: ${this.movy}px;
     `;
-    console.log(this.r,this.g,this.b)
+
+    this.posx = bolinha.offsetLeft - 20;
+    this.posy = bolinha.offsetTop - 20;
   }
 }
 
@@ -74,5 +78,5 @@ window.addEventListener("keydown", (event) => {
 var start = document.querySelector('#btn_start');
 
 document.addEventListener('DOMContentLoaded',()=>{
-  bolinha.push(new Bolinha());
+  bolinhas.push(new Bolinha());
 })
