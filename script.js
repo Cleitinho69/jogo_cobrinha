@@ -14,8 +14,8 @@ class Bolinha {
     this.tamanho = 20;
     this.posx = this.offsetLeft - 20;
     this.posy = this.offsetTop - 20;
-    this.movx = this.movx;
-    this.movy = this.movy;
+    this.movx = 100;
+    this.movy = 100;
     this.mov = setInterval(this.movimento(), 500);
     this.creat();
   }
@@ -35,12 +35,13 @@ class Bolinha {
     tela.append(bolinha);
     bolinha.setAttribute('id','cabeca')
     bolinha.style= `
-      backgroun-color: rgb(${this.r},${this.g},${this.b});
-      width: ${this.tamanho}px;
-      height: ${this.tamanho}px;
-      margin-left: ${this.posx};
-      margin-top: ${this.posy};
+    background-color: rgb(${this.r},${this.g},${this.b});
+    width: ${this.tamanho}px;
+    height: ${this.tamanho}px;
+    margin-left: ${this.movx}px;
+    margin-top: ${this.movy}px;
     `;
+    console.log(this.r,this.g,this.b)
   }
 }
 
@@ -72,6 +73,6 @@ window.addEventListener("keydown", (event) => {
 
 var start = document.querySelector('#btn_start');
 
-start.addEventListener('click',()=>{
+document.addEventListener('DOMContentLoaded',()=>{
   bolinha.push(new Bolinha());
 })

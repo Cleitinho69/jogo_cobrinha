@@ -23,7 +23,7 @@ header {
   height: 10%;
 
   border-radius: 10px;
-  border: 2px black solid;
+  border: 2px rgb(0, 0, 0) solid;
 
   margin: 5px;
 }
