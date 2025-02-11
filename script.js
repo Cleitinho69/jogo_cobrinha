@@ -4,6 +4,7 @@ const tamx = tela.clientHeight;
 const tamy = tela.clientWidth;
 var dirx = 1;
 var diry = 0;
+var bolinha = [];
 
 class Bolinha {
   constructor() {
@@ -16,7 +17,7 @@ class Bolinha {
     this.movx = this.movx;
     this.movy = this.movy;
     this.mov = setInterval(this.movimento(), 500);
-    this.creat;
+    this.creat();
   }
 
   movimento = () => {
@@ -37,6 +38,8 @@ class Bolinha {
       backgroun-color: rgb(${this.r},${this.g},${this.b});
       width: ${this.tamanho}px;
       height: ${this.tamanho}px;
+      margin-left: ${this.posx};
+      margin-top: ${this.posy};
     `;
   }
 }
@@ -66,3 +69,9 @@ window.addEventListener("keydown", (event) => {
       break;
   }
 });
+
+var start = document.querySelector('#btn_start');
+
+start.addEventListener('click',()=>{
+  bolinha.push(new Bolinha());
+})
