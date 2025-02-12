@@ -37,3 +37,10 @@ header {
   border-radius: 10px;
   border: 2px black solid;
 }
+
+#cabeca {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  border-radius: 100%;
+}
