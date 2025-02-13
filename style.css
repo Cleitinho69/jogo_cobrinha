@@ -38,9 +38,6 @@ header {
   border: 2px black solid;
 }
 
-#cabeca {
-  display: flex;
-  justify-items: center;
-  align-items: center;
+.bolinha{
   border-radius: 100%;
 }
