@@ -2,11 +2,10 @@ const tela = document.querySelector("#tela");
 
 const tamx = tela.clientWidth;
 const tamy = tela.clientHeight;
-var cabeca = document.querySelector('#cabeca');
-var dirx = 1;
-var diry = 0;
+var cabeca = document.querySelector("#cabeca");
+var dirx = 0;
+var diry = 1;
 var bolinhas = [];
-
 
 class Bolinha {
   constructor() {
@@ -21,21 +20,36 @@ class Bolinha {
   }
 
   movimento = () => {
-    console.log(this.posx)
-    if (this.posx < (tamx - this.tamanho) || dirx == -1 && this.posx > 0) {
-      this.movx = this.movx + (tamx * 0.01) * dirx;
-    }else{
-      this.movx+=((tamx-this.movx)-this.tamanho)
+    // Movimento no eixo x
+    if (
+      (this.posx < tamx - this.tamanho && dirx == 1) ||
+      (dirx == -1 && this.posx > 0 + this.tamanho)
+    ) {
+      this.movx += tamx * 0.0009 * dirx;
+    } else if (dirx == 1) {
+      this.movx += tamx - this.movx - this.tamanho;
+    } else if (dirx == -1) {
+      this.movx += -this.movx;
     }
-    if (this.posy < (tamy - this.tamanho) && this.posy > 0) {
-      this.movy += this.posy + (tamx * 0.0001) * diry;
+    // Movimento no eixo y
+    if(
+      (this.posy <= tamy && diry == 1) ||
+      (diry == -1 && this.posy >= 0)
+    ) {
+      this.movy += tamy * 0.0009 * diry;
+    } else if (diry == -1) { 
+      this.movy = 0;
+    } else if (diry == 1) {
+      this.movy += (tamy - this.movy - this.tamanho)*0.025;
     }
-  }
+
+    console.log(this.movx, this.movy);
+  };
 
   creat = () => {
-    const bolinha = document.createElement('div')
+    const bolinha = document.createElement("div");
     tela.append(bolinha);
-    bolinha.setAttribute('id', 'cabeca');
+    bolinha.setAttribute("id", "cabeca");
     bolinha.style = `
     background-color: rgb(${this.r},${this.g},${this.b});
     width: ${this.tamanho}px;
@@ -44,18 +58,18 @@ class Bolinha {
     margin-top: ${this.movy}px;
     `;
 
-    setInterval(()=>{
+    setInterval(() => {
       this.posx = bolinha.offsetLeft;
       this.posy = bolinha.offsetTop;
-    })
-  }
+    });
+  };
 }
 
-setInterval(()=>{
-  var cabeca = document.querySelector('#cabeca');
+setInterval(() => {
+  var cabeca = document.querySelector("#cabeca");
   
-  cabeca.style.marginLeft=bolinhas[0].movx+'px';
-},)
+  cabeca.style.margin = `${bolinhas[0].movy}px 0 0 ${bolinhas[0].movx}px`;
+});
 
 window.addEventListener("keydown", (event) => {
   key = event.key;
@@ -63,12 +77,12 @@ window.addEventListener("keydown", (event) => {
   switch (key) {
     case "ArrowUp":
       dirx = 0;
-      diry = 1;
+      diry = -1;
       break;
 
     case "ArrowDown":
       dirx = 0;
-      diry = -1;
+      diry = 1;
       break;
 
     case "ArrowRight":
@@ -83,8 +97,9 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-var start = document.querySelector('#btn_start');
+var start = document.querySelector("#btn_start");
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   bolinhas.push(new Bolinha());
-})
+});
+
