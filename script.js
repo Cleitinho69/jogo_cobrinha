@@ -4,8 +4,8 @@ const tela = document.querySelector("#tela");
 var tamx = tela.clientWidth;
 var limite_tela = tela.offsetTop;
 var tamy = tela.clientHeight;
-var dirx = 0;
-var diry = 1;
+var dirx = 1;
+var diry = 0;
 var bolinhas = [];
 
 class Bolinha {
@@ -15,7 +15,7 @@ class Bolinha {
     this.b = Math.floor(Math.random() * 255);
     this.tamanho = 40;
     this.movx = Math.floor(Math.random()*(tamx-this.tamanho));
-    this.movy = Math.floor(Math.random()*(tamy-this.tamanho));;
+    this.movy = Math.floor(Math.random()*(tamy-this.tamanho));
     this.creat();
     this.mover = setInterval(this.movimento);
   }
