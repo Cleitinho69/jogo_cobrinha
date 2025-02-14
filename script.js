@@ -14,8 +14,8 @@ class Bolinha {
     this.g = Math.floor(Math.random() * 255);
     this.b = Math.floor(Math.random() * 255);
     this.tamanho = 40;
-    this.movx = Math.floor(Math.random()*(tamx-this.tamanho));
-    this.movy = Math.floor(Math.random()*(tamy-this.tamanho));
+    this.movx = Math.floor(Math.random() * (tamx - this.tamanho));
+    this.movy = Math.floor(Math.random() * (tamy - this.tamanho));
     this.creat();
     this.mover = setInterval(this.movimento);
   }
@@ -28,20 +28,20 @@ class Bolinha {
     ) {
       this.movx += 5 * dirx;
     } else if (dirx == 1) {
-      this.movx += (tamx - this.movx - this.tamanho)*0.3;
+      this.movx += (tamx - this.movx - this.tamanho) * 0.3;
     } else if (dirx == -1) {
-      this.movx += (-this.movx)*0.5;
+      this.movx += (-this.movx) * 0.5;
     }
     // Movimento no eixo y
-    if(
+    if (
       (this.posy < tamy && diry == 1) ||
-      (diry == -1 && this.posy > this.tamanho+limite_tela)
+      (diry == -1 && this.posy > this.tamanho + limite_tela)
     ) {
       this.movy += 5 * diry;
-    } else if (diry == -1) { 
-      this.movy -= (this.movy)*0.3;
+    } else if (diry == -1) {
+      this.movy -= (this.movy) * 0.3;
     } else if (diry == 1) {
-      this.movy += (tamy - this.movy - this.tamanho)*0.3;
+      this.movy += (tamy - this.movy - this.tamanho) * 0.3;
     }
 
   };
@@ -69,7 +69,7 @@ class Bolinha {
 
 setInterval(() => {
   var cabeca = document.querySelector("#cabeca");
-  
+
   cabeca.style.margin = `${bolinhas[0].movy}px 0 0 ${bolinhas[0].movx}px`;
 });
 
@@ -96,18 +96,40 @@ window.addEventListener("keydown", (event) => {
       dirx = -1;
       diry = 0;
       break;
+
+    case "w":
+      dirx = 0;
+      diry = -1;
+      break;
+
+    case "s":
+      dirx = 0;
+      diry = 1;
+      break;
+
+    case "d":
+      dirx = 1;
+      diry = 0;
+      break;
+
+    case "a":
+      dirx = -1;
+      diry = 0;
+      break;
   }
 });
 
 var start = document.querySelector("#btn_start");
 
-start.addEventListener('click',()=>{
-  bolinhas.push( new Bolinha)
+start.addEventListener('click', () => {
+  bolinhas.push(new Bolinha)
 })
 
 var cancel = document.querySelector('#btn_cancel');
 
-cancel.addEventListener('click',()=>{
+cancel.addEventListener('click', () => {
   bolinhas.splice(0)
-  console.log(tela.children)
+  var bolinha = document.querySelector('#cabeca')
+
+  tela.removeChild(bolinha)
 })
